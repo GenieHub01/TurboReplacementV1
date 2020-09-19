@@ -22,6 +22,18 @@ class StoreController extends BaseController
         if (!$model){
             throw  new NotFoundHttpException('Not Found');
         }
+        if ($model->images && gettype($model->images) == 'string')
+        {
+            $model->images = json_decode($model->images);
+        }
+        if ($model->part_number_list && gettype($model->part_number_list) == 'string')
+        {
+            $model->part_number_list = json_decode($model->part_number_list);
+        }
+        if ($model->comparison_number_list && gettype($model->comparison_number_list) == 'string')
+        {
+            $model->comparison_number_list = json_decode($model->comparison_number_list);
+        }
 
         return $this->render('view',['model'=>$model]);
     }
